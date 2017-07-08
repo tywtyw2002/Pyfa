@@ -30,7 +30,8 @@ marketgroups_table = Table("invmarketgroups", gamedata_meta,
                            Column("hasTypes", Boolean),
                            Column("parentGroupID", Integer,
                                   ForeignKey("invmarketgroups.marketGroupID", initially="DEFERRED", deferrable=True)),
-                           Column("iconID", Integer, ForeignKey("icons.iconID")))
+                           Column("iconID", Integer, ForeignKey("icons.iconID")),
+                           Column("chsName", String))
 
 mapper(MarketGroup, marketgroups_table,
        properties={
@@ -40,5 +41,6 @@ mapper(MarketGroup, marketgroups_table,
            "icon"       : relation(Icon),
            "ID"         : synonym("marketGroupID"),
            "name"       : synonym("marketGroupName"),
-           "description": deferred(marketgroups_table.c.description)
+           "description": deferred(marketgroups_table.c.description),
+           "chs_name"   : synonym("chsName")
         })

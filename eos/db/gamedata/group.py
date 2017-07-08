@@ -29,7 +29,8 @@ groups_table = Table("invgroups", gamedata_meta,
                      Column("description", String),
                      Column("published", Boolean),
                      Column("categoryID", Integer, ForeignKey("invcategories.categoryID")),
-                     Column("iconID", Integer, ForeignKey("icons.iconID")))
+                     Column("iconID", Integer, ForeignKey("icons.iconID")),
+                     Column("chsName", String))
 
 mapper(Group, groups_table,
        properties={
@@ -37,5 +38,6 @@ mapper(Group, groups_table,
            "icon"       : relation(Icon),
            "ID"         : synonym("groupID"),
            "name"       : synonym("groupName"),
-           "description": deferred(groups_table.c.description)
+           "description": deferred(groups_table.c.description),
+           "chs_name"   : synonym("chsName")
        })

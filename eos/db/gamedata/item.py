@@ -38,7 +38,9 @@ items_table = Table("invtypes", gamedata_meta,
                     Column("published", Boolean),
                     Column("marketGroupID", Integer, ForeignKey("invmarketgroups.marketGroupID")),
                     Column("iconID", Integer, ForeignKey("icons.iconID")),
-                    Column("groupID", Integer, ForeignKey("invgroups.groupID"), index=True))
+                    Column("groupID", Integer, ForeignKey("invgroups.groupID"), index=True),
+                    Column("chsName", String)
+                    )
 
 from .metaGroup import metatypes_table  # noqa
 from .traits import traits_table  # noqa
@@ -57,7 +59,8 @@ mapper(Item, items_table,
            "description"      : deferred(items_table.c.description),
            "traits"           : relation(Traits,
                                          primaryjoin=traits_table.c.typeID == items_table.c.typeID,
-                                         uselist=False)
+                                         uselist=False),
+           "chs_name"   : synonym("chsName")
        })
 
 Item.category = association_proxy("group", "category")
