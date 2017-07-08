@@ -478,14 +478,8 @@ class ItemView(Display):
         for i, item in enumerate(items[:9]):
             # set shortcut info for first 9 modules
             item.marketShortcut = i + 1
-        chs_items = []
-        for item in items:
-            if item.chs_name:
-                item.name = "%s(%s)" % (item.name, item.chs_name)
-                # sqlalchemy auto sync the name, need to hack avoid put chs name again.
-                item.chs_name = ""
-            chs_items.append(item)
-        Display.refresh(self, chs_items)
+
+        Display.refresh(self, items)
 
     def makeReverseMetaMap(self):
         """

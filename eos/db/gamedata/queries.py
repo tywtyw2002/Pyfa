@@ -94,10 +94,6 @@ def getItem(lookfor, eager=None):
             itemNameMap[lookfor] = item.ID
     else:
         raise TypeError("Need integer or string as argument")
-    # hack item.
-    if item.chs_name:
-        item.name = "%s(%s)" % (item.name, item.chs_name)
-        item.chs_name = ""
     return item
 
 
