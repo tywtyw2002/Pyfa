@@ -153,7 +153,9 @@ class MarketTree(wx.TreeCtrl):
         sMkt = self.sMkt
         for mktGrp in sMkt.getMarketRoot():
             iconId = self.addImage(sMkt.getIconByMarketGroup(mktGrp))
-            childId = self.AppendItem(self.root, mktGrp.name, iconId, data=wx.TreeItemData(mktGrp.ID))
+            mkt_name = "%s(%s)" % (mktGrp.name, mktGrp.chs_name)
+            # childId = self.AppendItem(self.root, mktGrp.name, iconId, data=wx.TreeItemData(mktGrp.ID))
+            childId = self.AppendItem(self.root, mkt_name, iconId, data=wx.TreeItemData(mktGrp.ID))
             # All market groups which were never expanded are dummies, here we assume
             # that all root market groups are expandable
             self.AppendItem(childId, "dummy")
@@ -188,7 +190,9 @@ class MarketTree(wx.TreeCtrl):
                     continue
                 iconId = self.addImage(sMkt.getIconByMarketGroup(childMktGrp))
                 try:
-                    childId = self.AppendItem(root, childMktGrp.name, iconId, data=wx.TreeItemData(childMktGrp.ID))
+                    mkt_name = "%s(%s)" % (childMktGrp.name, childMktGrp.chs_name)
+                    # childId = self.AppendItem(root, childMktGrp.name, iconId, data=wx.TreeItemData(childMktGrp.ID))
+                    childId = self.AppendItem(root, mkt_name, iconId, data=wx.TreeItemData(childMktGrp.ID))
                 except Exception as e:
                     pyfalog.debug("Error appending item.")
                     pyfalog.debug(e)
@@ -324,8 +328,10 @@ class ItemView(Display):
                     sMkt = self.sMkt
                     # Get current market group
                     mg = sMkt.getMarketGroup(seldata, eager=("items", "items.metaGroup"))
+                    # pyfalog.debug('331')
                     # Get all its items
                     items = sMkt.getItemsByMarketGroup(mg)
+                    # pyfalog.debug(items)
                 else:
                     items = set()
             else:
@@ -334,6 +340,8 @@ class ItemView(Display):
                     items = self.recentlyUsedModules
                 else:
                     items = set()
+
+            #pyfalog.debug(items)
 
             # Fill store
             self.updateItemStore(items)
@@ -470,8 +478,13 @@ class ItemView(Display):
         for i, item in enumerate(items[:9]):
             # set shortcut info for first 9 modules
             item.marketShortcut = i + 1
-
-        Display.refresh(self, items)
+        # pyfalog.debug(items)
+        chs_items = []
+        for item in items:
+            item.name = "%s(%s)" % (item.name, item.chs_name)
+            chs_items.append(item)
+        # pyfalog.debug(chs_items)
+        Display.refresh(self, chs_items)
 
     def makeReverseMetaMap(self):
         """

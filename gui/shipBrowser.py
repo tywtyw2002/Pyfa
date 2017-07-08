@@ -738,7 +738,9 @@ class ShipBrowser(wx.Panel):
             if self.filterShipsWithNoFits and not self.categoryFitCache[ship.ID]:
                 continue
             else:
-                self.lpane.AddWidget(CategoryItem(self.lpane, ship.ID, (ship.name, 0)))
+                ship_name = "%s(%s)" % (ship.name, ship.chs_name)
+                # self.lpane.AddWidget(CategoryItem(self.lpane, ship.ID, (ship.name, 0)))
+                self.lpane.AddWidget(CategoryItem(self.lpane, ship.ID, (ship_name, 0)))
 
         self.navpanel.ShowSwitchEmptyGroupsButton(True)
 
@@ -800,10 +802,15 @@ class ShipBrowser(wx.Panel):
             if self.filterShipsWithNoFits:
                 if fits > 0:
                     if filter_:
-                        self.lpane.AddWidget(ShipItem(self.lpane, ship.ID, (ship.name, shipTrait, fits), ship.race))
+                        ship_name = "%s(%s)" % (ship.name, ship.chs_name)
+                        # self.lpane.AddWidget(ShipItem(self.lpane, ship.ID, (ship.name, shipTrait, fits), ship.race))
+                        self.lpane.AddWidget(ShipItem(self.lpane, ship.ID, (ship_name, shipTrait, fits), ship.race))
+
             else:
                 if filter_:
-                    self.lpane.AddWidget(ShipItem(self.lpane, ship.ID, (ship.name, shipTrait, fits), ship.race))
+                    ship_name = "%s(%s)" % (ship.name, ship.chs_name)
+                    # self.lpane.AddWidget(ShipItem(self.lpane, ship.ID, (ship.name, shipTrait, fits), ship.race))
+                    self.lpane.AddWidget(ShipItem(self.lpane, ship.ID, (ship_name, shipTrait, fits), ship.race))
 
         self.raceselect.RebuildRaces(racesList)
 
