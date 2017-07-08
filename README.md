@@ -4,6 +4,36 @@
 
 ![pyfa](https://cloud.githubusercontent.com/assets/3904767/10271512/af385ef2-6ade-11e5-8f67-52b8b1e4c797.PNG)
 
+## About Chinese Version
+
+![2017-07-07_23-58-07](https://user-images.githubusercontent.com/576954/27983029-745200ae-6370-11e7-8d6c-10cd8efa5ae7.png)
+![2017-07-07_23-16-38](https://user-images.githubusercontent.com/576954/27983031-76c6f8ee-6370-11e7-9dd2-e43c2dd53ce1.png)
+
+完成了大部分物品和船只名称的汉化。
+
+### How to run
+1. Clone这个repo到本地
+2. 用`pip`安装所需要的包`pip install -r requirements.txt`。
+3. 打开shell，进入pyfa的文件夹，执行`python pyfa.py`。
+
+PS，如果有人了解如python程序win下打包，欢迎去打包发布本汉化（请留下本github的地址）。
+
+### Tech Details
+
+- 在SQL中增加一个`chsName`的字段
+- 修改了程序，动态加载汉化字符到英文名字的后面。
+
+### ToDo
+- [ ] 加入中文的技能名称。
+- [ ] 添加缺失船只和物品的汉化名称。
+- [ ] 上传eve.db数据库操作的脚本。
+
+### Credits
+
+- Sqlite操作脚本, https://github.com/mm12432/Pyfa_eve_db_cn 
+- 汉化资料, https://www.eve-ship.com/
+- 汉化资料(xls), https://www.ceve-market.org/app/db_excel.7z?20160520
+
 ## What is it?
 
 pyfa, short for **py**thon **f**itting **a**ssistant, allows you to create, experiment with, and save ship fittings without being in game. Open source and written in Python, it is available on any platform where Python 2.x and wxWidgets are available, including Windows, Mac OS X, and Linux.
