@@ -60,7 +60,7 @@ mapper(Item, items_table,
            "traits"           : relation(Traits,
                                          primaryjoin=traits_table.c.typeID == items_table.c.typeID,
                                          uselist=False),
-           "chs_name"   : synonym("chsName")
+           "chs_name"         : synonym("chsName"),
        })
 
 Item.category = association_proxy("group", "category")
