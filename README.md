@@ -11,12 +11,20 @@
 
 完成了大部分物品和船只名称的汉化。
 
+**下载地址**
+
+Alpha Test Build: https://github.com/tywtyw2002/Pyfa/releases/tag/v1.29.4CN
+
+下载 `pyfa_zh_cn.win32-2.7.zip`即可.
+
+
 ### How to run
+
 1. Clone这个repo到本地
 2. 用`pip`安装所需要的包`pip install -r requirements.txt`。
 3. 打开shell，进入pyfa的文件夹，执行`python pyfa.py`。
 
-PS，如果有人了解如python程序win下打包，欢迎去打包发布本汉化（请留下本github的地址）。
+~~PS，如果有人了解如python程序win下打包，欢迎去打包发布本汉化（请留下本github的地址）。~~
 
 ### Tech Details
 
@@ -24,8 +32,9 @@ PS，如果有人了解如python程序win下打包，欢迎去打包发布本汉
 - 修改了程序，动态加载汉化字符到英文名字的后面。
 
 ### ToDo
-- [ ] 加入中文的技能名称。
-- [ ] 添加缺失船只和物品的汉化名称。
+- [X] 加入中文的技能名称。
+- [X] 添加缺失船只和物品的汉化名称。
+- [X] Win Exe 打包
 - [ ] 上传eve.db数据库操作的脚本。
 
 ### Credits
