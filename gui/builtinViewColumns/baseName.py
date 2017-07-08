@@ -46,14 +46,24 @@ class BaseName(ViewColumn):
         self.mask = wx.LIST_MASK_TEXT
         self.projectedView = isinstance(fittingView, gui.projectedView.ProjectedView)
 
+    def try_chs_name(self, item):
+        if getattr(item, "chs_name", None):
+            return "%s(%s)" % (item.name, item.chs_name)
+        else:
+            return item.name
+
     def getText(self, stuff):
         if isinstance(stuff, Drone):
-            return "%dx %s" % (stuff.amount, stuff.item.name)
+            # return "%dx %s" % (stuff.amount, stuff.item.name)
+            return "%dx %s" % (stuff.amount, self.try_chs_name(stuff.item))
         elif isinstance(stuff, Fighter):
             return "%d/%d %s" % \
-                   (stuff.amountActive, stuff.getModifiedItemAttr("fighterSquadronMaxSize"), stuff.item.name)
+                   (stuff.amountActive, 
+                    stuff.getModifiedItemAttr("fighterSquadronMaxSize"),
+                    self.try_chs_name(stuff.item))
         elif isinstance(stuff, Cargo):
-            return "%dx %s" % (stuff.amount, stuff.item.name)
+            # return "%dx %s" % (stuff.amount, stuff.item.name)
+            return "%dx %s" % (stuff.amount, self.try_chs_name(stuff.item))
         elif isinstance(stuff, Fit):
             if self.projectedView:
                 # we need a little more information for the projected view
@@ -80,11 +90,16 @@ class BaseName(ViewColumn):
             if stuff.isEmpty:
                 return "%s Slot" % Slot.getName(stuff.slot).capitalize()
             else:
-                return stuff.item.name
+                # return stuff.item.name
+                return self.try_chs_name(stuff.item)
         elif isinstance(stuff, Implant):
-            return stuff.item.name
+            # return stuff.item.name
+            return self.try_chs_name(stuff.item)
         else:
             item = getattr(stuff, "item", stuff)
+
+            # hack chs name
+            ret_name = self.try_chs_name(item)
 
             if FitSvc.getInstance().serviceFittingOptions["showMarketShortcuts"]:
                 marketShortcut = getattr(item, "marketShortcut", None)
@@ -93,9 +108,11 @@ class BaseName(ViewColumn):
                     # use unicode subscript to display shortcut value
                     shortcut = unichr(marketShortcut + 8320) + u" "
                     del item.marketShortcut
-                    return shortcut + item.name
+                    return shortcut + ret_name
+                    # return shortcut + item.name
 
-            return item.name
+            # return item.name
+            return ret_name
 
 
 BaseName.register()

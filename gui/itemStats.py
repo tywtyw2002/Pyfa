@@ -48,6 +48,7 @@ import gui.mainFrame
 from gui.bitmapLoader import BitmapLoader
 from gui.utils.numberFormatter import formatAmount
 from gui.contextMenu import ContextMenu
+from gui.utils.chsUtils import try_chs_skillname, try_chs_name
 
 
 class ItemStatsDialog(wx.Dialog):
@@ -670,7 +671,8 @@ class ItemCompare(wx.Panel):
         self.paramList.SetColumnWidth(len(self.attrs) + 1, 60)
 
         for item in self.items:
-            i = self.paramList.InsertStringItem(sys.maxint, item.name)
+            # i = self.paramList.InsertStringItem(sys.maxint, item.name)
+            i = self.paramList.InsertStringItem(sys.maxint, try_chs_name(item))
             for x, attr in enumerate(self.attrs.keys()):
                 if attr in item.attributes:
                     info = self.attrs[attr]
@@ -760,7 +762,8 @@ class ItemRequirements(wx.Panel):
 
     def getFullSkillTree(self, parentSkill, parent, sbIconId):
         for skill, level in parentSkill.requiredSkills.iteritems():
-            child = self.reqTree.AppendItem(parent, "%s  %s" % (skill.name, self.romanNb[int(level)]), sbIconId)
+            # child = self.reqTree.AppendItem(parent, "%s  %s" % (skill.name, self.romanNb[int(level)]), sbIconId)
+            child = self.reqTree.AppendItem(parent, try_chs_skillname(skill, self.romanNb[int(level)]), sbIconId)
             if skill.ID not in self.skillIdHistory:
                 self.getFullSkillTree(skill, child, sbIconId)
                 self.skillIdHistory.append(skill.ID)
