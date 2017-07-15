@@ -24,7 +24,9 @@ class MarketTree(wx.TreeCtrl):
         sMkt = self.sMkt
         for mktGrp in sMkt.getMarketRoot():
             iconId = self.addImage(sMkt.getIconByMarketGroup(mktGrp))
-            childId = self.AppendItem(self.root, mktGrp.name, iconId, data=wx.TreeItemData(mktGrp.ID))
+            mkt_name = "%s(%s)" % (mktGrp.name, mktGrp.chs_name)
+            childId = self.AppendItem(self.root, mkt_name, iconId, data=wx.TreeItemData(mktGrp.ID))
+            # childId = self.AppendItem(self.root, mktGrp.name, iconId, data=wx.TreeItemData(mktGrp.ID))
             # All market groups which were never expanded are dummies, here we assume
             # that all root market groups are expandable
             self.AppendItem(childId, "dummy")
@@ -59,7 +61,9 @@ class MarketTree(wx.TreeCtrl):
                     continue
                 iconId = self.addImage(sMkt.getIconByMarketGroup(childMktGrp))
                 try:
-                    childId = self.AppendItem(root, childMktGrp.name, iconId, data=wx.TreeItemData(childMktGrp.ID))
+                    # childId = self.AppendItem(root, childMktGrp.name, iconId, data=wx.TreeItemData(childMktGrp.ID))
+                    mkt_name = "%s(%s)" % (childMktGrp.name, childMktGrp.chs_name)
+                    childId = self.AppendItem(root, mkt_name, iconId, data=wx.TreeItemData(childMktGrp.ID))
                 except Exception as e:
                     pyfalog.debug("Error appending item.")
                     pyfalog.debug(e)
