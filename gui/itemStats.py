@@ -1206,7 +1206,7 @@ class ItemAffectedBy(wx.Panel):
                             penalized += "(penalized)"
                         if 'r' in attrModifier:
                             penalized += "(resisted)"
-                    attrModifier = "*"
+                        attrModifier = "*"
 
                     # this is the Module node, the attribute will be attached to this
                     display = "%s %s %.2f %s" % (displayStr, attrModifier, attrAmount, penalized)
@@ -1338,7 +1338,7 @@ class ItemAffectedBy(wx.Panel):
                                 penalized += "(penalized)"
                             if 'r' in attrModifier:
                                 penalized += "(resisted)"
-                        attrModifier = "*"
+                            attrModifier = "*"
 
                         attributes.append((attrName, (displayName if displayName != "" else attrName), attrModifier,
                                            attrAmount, penalized, attrIcon))

@@ -44,7 +44,7 @@ class BaseName(ViewColumn):
         self.columnText = "Name"
         self.shipImage = fittingView.imageList.GetImageIndex("ship_small", "gui")
         self.mask = wx.LIST_MASK_TEXT
-        self.projectedView = isinstance(fittingView, gui.projectedView.ProjectedView)
+        self.projectedView = isinstance(fittingView, gui.builtinAdditionPanes.projectedView.ProjectedView)
 
     def try_chs_name(self, item):
         if getattr(item, "chs_name", None):
